@@ -1,6 +1,8 @@
 import math, sys, numpy as np
-
-def ens2(word, dict, dict2):
+"""
+邮件中sender email addr特征的精炼
+"""
+def ens2(word, dict, dict2): # 代码注释见同目录下的select_word.py，逻辑相同
     s = dict.item().get('count')
     spam = dict.item().get('label_of_the_email')
     sv1 = dict.item().get(word)
@@ -29,6 +31,9 @@ def ens2(word, dict, dict2):
     return ens2
 
 def main(argv):
+    if len(sys.argv)!=3:
+        print('usage: select_word_sender.py start_test_dir end_test_dir')
+        sys.exit()
     dic={}
     dict = np.load('./dicts/exist_sender_dict'+sys.argv[1]+'_'+str(int(sys.argv[2])-1)+'.npy',allow_pickle=True)
     print('spam: '+str(dict.item().get('label_of_the_email')))

@@ -1,7 +1,9 @@
 import os, sys, validators
 import numpy as np
-
-def main(argv):
+"""
+邮件中sender email addr特征的测试
+"""
+def main(argv):# 代码注释见同目录下的test.py，逻辑相同
     spam_total = 0
     ham_total = 0
     predict_spam_correct = 0

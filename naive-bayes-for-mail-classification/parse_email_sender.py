@@ -1,7 +1,9 @@
 import os, sys, validators, getopt
 import numpy as np
-
-def main(argv):
+"""
+邮件中sender email addr特征的提取
+"""
+def main(argv): # 代码注释见同目录下的parse_email.py，逻辑相同
     exist_sender_dict = {}
     exist_sender_spam_dict = {}
     exist_sender_dict['count']=0
