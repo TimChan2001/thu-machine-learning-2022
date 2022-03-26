@@ -41,9 +41,9 @@ def main(argv):
     dict2 = np.load('./dicts/exist_spam_dict'+sys.argv[1]+'_'+str(int(sys.argv[2])-1)+'.npy',allow_pickle=True)
 
     for key in dict.item().keys():
-        if dict.item().get(key)>2: # 去掉所有出现邮件数小于3的词
+        if dict.item().get(key)>4: # 去掉所有出现邮件数小于5的词
             dic[key]=dict.item().get(key)
-    print(len(dic.keys()))
+    #print(len(dic.keys()))
     entropy = {}
     for word in dic.keys():
         entropy[word]=ens2(word,dict,dict2)

@@ -10,7 +10,7 @@ def ens2(word, dict, dict2): # 代码注释见同目录下的select_word.py，�
     ensv1 = 1
     ensv2 = 1
     if sv2 == 0:
-        return 1 # give up
+        return 1 
     if word not in dict2.item().keys():
         ensv1 = 0
         spam_in_sv1 = 0
@@ -18,7 +18,7 @@ def ens2(word, dict, dict2): # 代码注释见同目录下的select_word.py，�
         spam_in_sv1 = dict2.item().get(word)
     spam_in_sv2 =  spam - spam_in_sv1
     if spam_in_sv2 == 0:
-        ensv2 = 0 # in 
+        ensv2 = 0 
     if spam_in_sv1 == sv1:
         ensv1 = 0
     if spam_in_sv2 == sv2:
@@ -42,7 +42,6 @@ def main(argv):
     for key in dict.item().keys():
         if dict.item().get(key)>2:
             dic[key]=dict.item().get(key)
-    print(len(dic.keys()))
     entropy = {}
     for word in dic.keys():
         entropy[word]=ens2(word,dict,dict2)

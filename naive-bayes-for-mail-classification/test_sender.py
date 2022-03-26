@@ -120,6 +120,8 @@ def main(argv):# 代码注释见同目录下的test.py，逻辑相同
                 except:
                     continue
         print('accuracy: '+str((predict_spam_correct+predict_ham_correct)/(ham_total+spam_total)))     
+        print('precision: '+str(predict_spam_correct/(predict_spam_correct+predict_spam_wrong)))
+        print('recall: '+str(predict_spam_correct/spam_total))
         print('false positive rate: '+str(predict_spam_wrong/ham_total))
         print('false negative rate: '+str(predict_ham_wrong/spam_total))
 if __name__ == "__main__":
