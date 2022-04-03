@@ -1,0 +1,390 @@
+38204.695151684144
+
+the mean vector move: tensor(11034.1518, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 3 9 
+acc: 45.42666666666667%
+
+the mean vector move: tensor(2296.9864, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 3 9 
+acc: 53.208333333333336%
+
+the mean vector move: tensor(1220.1626, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 3 9 
+acc: 55.663333333333334%
+
+the mean vector move: tensor(732.7871, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 56.56666666666666%
+
+the mean vector move: tensor(526.7623, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 57.373333333333335%
+
+the mean vector move: tensor(431.7083, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 57.879999999999995%
+
+the mean vector move: tensor(386.5389, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 58.20666666666667%
+
+the mean vector move: tensor(362.6246, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 58.373333333333335%
+
+the mean vector move: tensor(347.0296, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 58.355000000000004%
+
+the mean vector move: tensor(356.8616, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 58.29166666666667%
+
+the mean vector move: tensor(354.5839, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 58.13999999999999%
+
+the mean vector move: tensor(364.6370, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 57.89166666666667%
+
+the mean vector move: tensor(350.8030, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 5 6 7 9 9 
+acc: 57.645%
+
+the mean vector move: tensor(349.8611, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 9 
+acc: 57.41333333333334%
+
+the mean vector move: tensor(325.1406, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.45%
+
+the mean vector move: tensor(292.1323, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.57%
+
+the mean vector move: tensor(244.7921, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.61000000000001%
+
+the mean vector move: tensor(214.4560, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.56666666666666%
+
+the mean vector move: tensor(198.6373, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.464999999999996%
+
+the mean vector move: tensor(180.9608, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.335%
+
+the mean vector move: tensor(170.5005, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.18833333333333%
+
+the mean vector move: tensor(169.6266, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 57.018333333333324%
+
+the mean vector move: tensor(173.0098, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 56.84%
+
+the mean vector move: tensor(173.1561, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 56.59%
+
+the mean vector move: tensor(174.5061, dtype=torch.float64)
+main label of clusters: 0 1 2 3 4 3 6 7 9 8 
+acc: 56.28333333333333%
+
+the mean vector move: tensor(181.4298, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 8 
+acc: 56.115%
+
+the mean vector move: tensor(186.2229, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 8 
+acc: 55.945%
+
+the mean vector move: tensor(195.2824, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 8 
+acc: 55.73166666666667%
+
+the mean vector move: tensor(198.5864, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 8 
+acc: 55.50333333333333%
+
+the mean vector move: tensor(205.2351, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.58666666666667%
+
+the mean vector move: tensor(205.6040, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.63166666666667%
+
+the mean vector move: tensor(198.8716, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.663333333333334%
+
+the mean vector move: tensor(189.7348, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.67666666666666%
+
+the mean vector move: tensor(174.4985, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.78000000000001%
+
+the mean vector move: tensor(162.1056, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.843333333333334%
+
+the mean vector move: tensor(139.8816, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.89666666666666%
+
+the mean vector move: tensor(130.5677, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 55.96666666666666%
+
+the mean vector move: tensor(114.0592, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.00166666666666%
+
+the mean vector move: tensor(91.7178, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.071666666666665%
+
+the mean vector move: tensor(87.7537, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.11166666666667%
+
+the mean vector move: tensor(84.2705, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.184999999999995%
+
+the mean vector move: tensor(72.7601, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.25666666666667%
+
+the mean vector move: tensor(61.1230, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.358333333333334%
+
+the mean vector move: tensor(57.5926, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.42666666666667%
+
+the mean vector move: tensor(42.6667, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.48%
+
+the mean vector move: tensor(36.6759, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.52166666666667%
+
+the mean vector move: tensor(33.3698, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.56833333333333%
+
+the mean vector move: tensor(34.2857, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.59666666666667%
+
+the mean vector move: tensor(29.7551, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.63166666666667%
+
+the mean vector move: tensor(25.5804, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.663333333333334%
+
+the mean vector move: tensor(24.7953, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.70666666666666%
+
+the mean vector move: tensor(22.5824, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.74%
+
+the mean vector move: tensor(20.0152, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.78333333333334%
+
+the mean vector move: tensor(21.8572, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.81%
+
+the mean vector move: tensor(21.2638, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.86833333333333%
+
+the mean vector move: tensor(21.9643, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.91333333333333%
+
+the mean vector move: tensor(20.7809, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.94833333333334%
+
+the mean vector move: tensor(17.2097, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 56.995%
+
+the mean vector move: tensor(16.9969, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.04333333333334%
+
+the mean vector move: tensor(13.4138, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.068333333333335%
+
+the mean vector move: tensor(8.8164, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.08166666666668%
+
+the mean vector move: tensor(8.2601, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.086666666666666%
+
+the mean vector move: tensor(6.4146, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.086666666666666%
+
+the mean vector move: tensor(8.0977, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.101666666666674%
+
+the mean vector move: tensor(7.8780, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.09333333333333%
+
+the mean vector move: tensor(10.0855, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.10999999999999%
+
+the mean vector move: tensor(10.0389, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.125%
+
+the mean vector move: tensor(9.4494, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.13333333333333%
+
+the mean vector move: tensor(7.8047, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.145%
+
+the mean vector move: tensor(7.6561, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.156666666666666%
+
+the mean vector move: tensor(7.7133, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.166666666666664%
+
+the mean vector move: tensor(7.0597, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.175%
+
+the mean vector move: tensor(6.9421, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.190000000000005%
+
+the mean vector move: tensor(7.3636, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.190000000000005%
+
+the mean vector move: tensor(6.7497, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.19333333333334%
+
+the mean vector move: tensor(9.1604, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.20833333333333%
+
+the mean vector move: tensor(9.5228, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.223333333333336%
+
+the mean vector move: tensor(8.5250, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.23666666666667%
+
+the mean vector move: tensor(6.3738, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.24666666666667%
+
+the mean vector move: tensor(6.7202, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.26166666666666%
+
+the mean vector move: tensor(5.8951, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.265%
+
+the mean vector move: tensor(3.7077, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.27166666666667%
+
+the mean vector move: tensor(4.7066, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.276666666666664%
+
+the mean vector move: tensor(4.6857, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.281666666666666%
+
+the mean vector move: tensor(6.4948, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.28333333333333%
+
+the mean vector move: tensor(4.2428, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.29166666666667%
+
+the mean vector move: tensor(2.7669, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.29500000000001%
+
+the mean vector move: tensor(4.4444, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.30333333333333%
+
+the mean vector move: tensor(4.1258, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.311666666666675%
+
+the mean vector move: tensor(3.8419, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.311666666666675%
+
+the mean vector move: tensor(3.6057, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.31666666666666%
+
+the mean vector move: tensor(2.0064, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.32166666666667%
+
+the mean vector move: tensor(2.5210, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.31999999999999%
+
+the mean vector move: tensor(0.9168, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.32166666666667%
+
+the mean vector move: tensor(0.5399, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.32166666666667%
+
+the mean vector move: tensor(0.5155, dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.32166666666667%
+
+the mean vector move: tensor(0., dtype=torch.float64)
+main label of clusters: 0 1 2 8 4 3 6 7 9 1 
+acc: 57.32166666666667%
+done after epoch 97 !

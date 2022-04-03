@@ -1,13 +1,57 @@
+import statistics
 from torchvision import datasets 
-import torch, numpy as np
+import random, datetime, torch, numpy as np
+
+out = open('./statistics/run1_20_log.txt','w')
 
 def choose_init_mean(train_data,mean_vec,clusters):
+    random.seed(datetime.datetime.now().timestamp())
+    threshold = 60000 * random.random()
+    print(threshold)
+    out.write(str(threshold)+'\n')
+
+    # for i in range(60000):
+    #     mean_vec[train_data[i][1]] = image2vec(train_data, i)
+    #     if len(mean_vec.keys()) == 10 and i > threshold:
+    #         break
+
+    # mean_vec_2={}
+    # for i in range(5):
+    #     clusters[i] = []
+    # for i in range(60000):
+    #     mean_vec_2[train_data[i][1]] = image2vec(train_data, i)
+    #     if len(mean_vec_2.keys()) == 6:
+    #         del mean_vec_2[train_data[i-1][1]]
+    #         if i > threshold:
+    #             break
+    # idx = 0
+    # for key in mean_vec_2.keys():
+    #     mean_vec[idx]=mean_vec_2[key]
+    #     idx+=1
+
+    idx = 0
+    mean_vec_2={}
+    for i in range(20):
+        clusters[i] = []
     for i in range(60000):
-        if train_data[i][1] not in mean_vec.keys():
-            mean_vec[train_data[i][1]] = image2vec(train_data, i)
-            clusters[train_data[i][1]] = []
-        if len(mean_vec.keys()) == 10:
+        mean_vec_2[train_data[i][1]] = image2vec(train_data, i)
+        if len(mean_vec_2.keys()) == 10 and i > threshold/2:
+            for key in mean_vec_2.keys():
+                mean_vec[idx]=mean_vec_2[key]
+                idx+=1
+            mean_vec_2.clear()
+            for j in range(i+1,60000):
+                mean_vec_2[train_data[j][1]] = image2vec(train_data, j)
+                if len(mean_vec_2.keys()) == 10 and j > threshold:
+                    break
             break
+    for key in mean_vec_2.keys():
+        mean_vec[idx]=mean_vec_2[key]
+        idx+=1
+
+    
+    
+
 
 def image2vec(train_data,idx):
     pic = train_data[idx][0]
@@ -36,8 +80,10 @@ def average_vec(vecs,train_data):
     return output.tolist()
 
 def train(epoch,train_data,mean_vec,clusters):
+    converge = 0
     for i in range(epoch):
         print()
+        out.write('\nepoch: '+str(i+1)+'\n')
         move = 0
         for key in clusters.keys():
             clusters[key].clear()
@@ -54,7 +100,7 @@ def train(epoch,train_data,mean_vec,clusters):
             vec = image2vec(train_data,j)
             distance = calculate_distance(vec,mean_vec[0])
             cluster_number = 0
-            for k in range(1,10):
+            for k in range(1,len(mean_vec.keys())):
                 new_distance = calculate_distance(vec,mean_vec[k])
                 if new_distance<distance:
                     distance = new_distance
@@ -71,7 +117,9 @@ def train(epoch,train_data,mean_vec,clusters):
             mean_vec[k] = new_k_mean
         print('')
         print("the mean vector move: "+str(move))
+        out.write("the mean vector move: "+str(move)+'\n')
         print("main label of clusters: ",end='')
+        out.write("main label of clusters: ")
         count = 0
         for j in range(len(mean_vec.keys())):
             thelist = clusters[j]
@@ -88,12 +136,21 @@ def train(epoch,train_data,mean_vec,clusters):
                     the_max = count_max[key]
                     main_ele = key
             print(main_ele,end=' ')
+            out.write(str(main_ele)+' ')
             for ele in thelist:
                 if train_data[ele][1]!=main_ele:
                     count+=1
         print('\nacc: '+str((1-count/60000)*100)+'%')
-        np.save('./clusters/strategy1_epoch'+str(i)+'.npy',clusters)
-    print("done after epoch "+str(epoch)+" !")
+        out.write('\nacc: '+str((1-count/60000)*100)+'%\n')
+        np.save('./clusters/run1_20_epoch'+str(i+1)+'.npy',clusters)
+        if move == 0:
+            print("done after epoch "+str(i+1)+" !")
+            out.write("done after epoch "+str(i+1)+" !\n")
+            converge = 1
+            break
+    if converge == 0:
+        print("not converged yet!")
+        out.write("not converged yet!\n")
 
 
 def main():
@@ -101,7 +158,8 @@ def main():
     clusters = {}
     train_data = datasets.MNIST(root = './data',train = True, download=False)
     choose_init_mean(train_data,mean_vec,clusters)
-    train(99,train_data,mean_vec,clusters)
+    train(200,train_data,mean_vec,clusters)
+    out.close()
 
 if __name__ == "__main__":
     main()
