@@ -2,7 +2,7 @@ import statistics
 from torchvision import datasets 
 import random, datetime, torch, numpy as np
 
-out = open('./statistics/run1_20_log.txt','w')
+out = open('./statistics/run2_20_log.txt','w')
 
 def choose_init_mean(train_data,mean_vec,clusters):
     random.seed(datetime.datetime.now().timestamp())
@@ -93,9 +93,11 @@ def train(epoch,train_data,mean_vec,clusters):
             a = "*" * m
             b = "." * (scale - m)
             c = (m / scale) * 100
-            d = ''
+            d = ' '
             if i+1 < 10:
-                d = ' '
+                d = '  '
+            if i+1 > 99:
+                d = ''
             print("\rrunning epoch: "+str(i+1)+d+"...... {:^3.0f}%[{}->{}]".format(c,a,b),end = "")
             vec = image2vec(train_data,j)
             distance = calculate_distance(vec,mean_vec[0])
@@ -111,7 +113,7 @@ def train(epoch,train_data,mean_vec,clusters):
             a = "*" * (k+1) * int(40/len(mean_vec.keys()))
             b = "." * (40 - (k+1) * int(40/len(mean_vec.keys())))
             c = ((k+1) / len(mean_vec.keys())) * 100
-            print("\rrenewing mean vectors:  {:^3.0f}%[{}->{}]".format(c,a,b),end = "")
+            print("\rrenewing mean vectors:   {:^3.0f}%[{}->{}]".format(c,a,b),end = "")
             new_k_mean = average_vec(clusters[k],train_data)
             move+=calculate_distance(new_k_mean,mean_vec[k])
             mean_vec[k] = new_k_mean
@@ -142,7 +144,7 @@ def train(epoch,train_data,mean_vec,clusters):
                     count+=1
         print('\nacc: '+str((1-count/60000)*100)+'%')
         out.write('\nacc: '+str((1-count/60000)*100)+'%\n')
-        np.save('./clusters/run1_20_epoch'+str(i+1)+'.npy',clusters)
+        np.save('./clusters/run2_20_epoch'+str(i+1)+'.npy',clusters)
         if move == 0:
             print("done after epoch "+str(i+1)+" !")
             out.write("done after epoch "+str(i+1)+" !\n")
