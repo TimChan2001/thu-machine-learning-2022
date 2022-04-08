@@ -1,6 +1,6 @@
 实验环境python>=3.7
 
-1.将`kmeans.py`中line 187
+1.将`kmeans.py`中line 186
 
 ```python
 train_data = datasets.MNIST(root = './data',train = True, download=False)
