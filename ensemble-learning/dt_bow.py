@@ -1,28 +1,17 @@
-from sklearn import svm
+from sklearn import tree
 import numpy as npy
-from gensim.models import Word2Vec
-import datetime, random
+import datetime
 
-model = Word2Vec.load("word2vec.model")
+dict = npy.load("word_dict.npy",allow_pickle=True)
 
 def text2vec(text):
-    sentence = []
-    complement_vec = []
-    for i in range(50):
-        complement_vec.append(0)
-    idx = 0
-    while len(sentence)<100:
-        try:
-            sentence.append(model.wv[text[idx]].tolist())
-            idx+=1
-        except:
-            idx+=1
-        if idx >= len(text):
-            break
-    while len(sentence)<100:
-        sentence.append(complement_vec)
-    sentence = npy.array(sentence)
-    return sentence.reshape([1,5000])[0]
+    vec= []
+    for i in range(1000):
+        vec.append(0)
+    for i in range(len(text)):
+        if dict.item().get(text[i]) != None:
+            vec[dict.item().get(text[i])]+=1
+    return vec
     
 def main(): 
     stopwords = []
@@ -31,21 +20,22 @@ def main():
         line = line.strip()
         stopwords.append(line)
 
-    train_item_all = []
+    train_item = []
     test_item = []
-    test_vec = []
-    test_label = []
-    train_vec_all = []
-    train_label_all = []
-    predictions = []
     division = npy.load("./division.npy",allow_pickle=True)
     for i in range(len(division)):
         if i < 20000:
             test_item.append(division[i])
         else:
-            train_item_all.append(division[i])
+            train_item.append(division[i])
     test_item.sort()
-    train_item_all.sort()
+    train_item.sort()
+
+    test_vec = []
+    test_label = []
+    train_vec = []
+    train_label = []
+
     items = open('./exp3-reviews.csv','r')
     idx = 0
     for line in items:
@@ -54,16 +44,13 @@ def main():
             text = []
             idx+=1
             # print(str(idx))
-            train = False
-            test = False
+            train = True
             if idx in test_item:
-                test = True
-            if idx in train_item_all:
-                train = True
+                train = False
             rating = (line.split('\t'))[0]
             if train:
-                train_label_all.append(int(rating[0]))
-            if test:
+                train_label.append(int(rating[0]))
+            else:
                 test_label.append(int(rating[0]))
             summary = (line.split('\t'))[-2]
             reviewText = (line.split('\t'))[-1]
@@ -101,60 +88,29 @@ def main():
                             text.append(word)
             vec = text2vec(text)
             if train:
-                train_vec_all.append(vec)
-            if test:
+                train_vec.append(vec)
+            else:
                 test_vec.append(vec)
-
-    for model_idx in range(30):
-        random.seed(datetime.datetime.now().timestamp())
-        random.shuffle(train_item_all)
-        train_item = train_item_all[0:20000]
-        train_vec = []
-        train_label = []
-        for k in range(len(train_item_all)):
-            if k+1 in train_item:
-                train_vec.append(train_vec_all[k+1])
-                train_label.append(train_label_all[k+1])
-        print("size of train set: "+str(len(train_vec)))
-        clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=100)
-        print("start to train model "+str(model_idx)+"!")
-        start_time = datetime.datetime.now().timestamp()
-        clf.fit(train_vec, train_label)
-        end_time = datetime.datetime.now().timestamp()
-        print("done training model "+str(model_idx)+" after "+str(round(end_time-start_time))+"s!")
-        prediction = clf.predict(test_vec)
-        predictions.append(prediction)
-    prediction_final = []
-    for i in range(len(predictions[0])):
-        vote = {
-            1:0,
-            2:0,
-            3:0,
-            4:0,
-            5:0
-        }
-        for j in range(len(predictions)):
-            vote[predictions[j][i]]+=1
-        votes = 0
-        winner = 0
-        for j in range(1,6):
-            if vote[j] >= votes:
-                votes = vote[j] 
-                winner = j
-        prediction_final.append(winner)
-        
+    print("size of train set: "+str(len(train_vec)))
+    clf = tree.DecisionTreeClassifier()
+    print("start to train!")
+    start_time = datetime.datetime.now().timestamp()
+    clf.fit(train_vec, train_label)
+    end_time = datetime.datetime.now().timestamp()
+    print("done training after "+str(round(end_time-start_time))+"s!")
+    prediction = clf.predict(test_vec)
     correct = 0
     difference = 0
-    for i in range(len(prediction_final)):
-        if prediction_final[i] == test_label[i]:
+    for i in range(len(prediction)):
+        if prediction[i] == test_label[i]:
             correct+=1
-        if prediction_final[i] > test_label[i]:
-            difference += prediction_final[i] - test_label[i]
+        if prediction[i] > test_label[i]:
+            difference += prediction[i] - test_label[i]
         else:
-            difference += test_label[i] - prediction_final[i]
+            difference += test_label[i] - prediction[i]
 
-    print("acc: "+str(round(100*correct/len(prediction_final)))+"%")
-    print("average difference: "+str(difference/len(prediction_final)))
+    print("acc: "+str(round(100*correct/len(prediction)))+"%")
+    print("average difference: "+str(difference/len(prediction)))
 
 if __name__ == "__main__":
    main()

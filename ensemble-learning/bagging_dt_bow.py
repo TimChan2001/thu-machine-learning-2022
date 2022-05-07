@@ -1,28 +1,17 @@
-from sklearn import svm
+from sklearn import tree
 import numpy as npy
-from gensim.models import Word2Vec
-import datetime, random
+import datetime,random
 
-model = Word2Vec.load("word2vec.model")
+dict = npy.load("word_dict.npy",allow_pickle=True)
 
 def text2vec(text):
-    sentence = []
-    complement_vec = []
-    for i in range(50):
-        complement_vec.append(0)
-    idx = 0
-    while len(sentence)<100:
-        try:
-            sentence.append(model.wv[text[idx]].tolist())
-            idx+=1
-        except:
-            idx+=1
-        if idx >= len(text):
-            break
-    while len(sentence)<100:
-        sentence.append(complement_vec)
-    sentence = npy.array(sentence)
-    return sentence.reshape([1,5000])[0]
+    vec= []
+    for i in range(1000):
+        vec.append(0)
+    for i in range(len(text)):
+        if dict.item().get(text[i]) != None:
+            vec[dict.item().get(text[i])]+=1
+    return vec
     
 def main(): 
     stopwords = []
@@ -104,7 +93,6 @@ def main():
                 train_vec_all.append(vec)
             if test:
                 test_vec.append(vec)
-
     for model_idx in range(30):
         random.seed(datetime.datetime.now().timestamp())
         random.shuffle(train_item_all)
@@ -116,7 +104,7 @@ def main():
                 train_vec.append(train_vec_all[k+1])
                 train_label.append(train_label_all[k+1])
         print("size of train set: "+str(len(train_vec)))
-        clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=100)
+        clf = tree.DecisionTreeClassifier()
         print("start to train model "+str(model_idx)+"!")
         start_time = datetime.datetime.now().timestamp()
         clf.fit(train_vec, train_label)

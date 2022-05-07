@@ -35,6 +35,8 @@ def main():
     test_item = []
     test_vec = []
     test_label = []
+    train_vec_all = []
+    train_label_all = []
     predictions = []
     division = npy.load("./division.npy",allow_pickle=True)
     for i in range(len(division)):
@@ -43,72 +45,75 @@ def main():
         else:
             train_item_all.append(division[i])
     test_item.sort()
-
-    for model_idx in range(20):
+    train_item_all.sort()
+    items = open('./exp3-reviews.csv','r')
+    idx = 0
+    for line in items:
+        line = line.strip()
+        if (line.split('\t'))[0] != 'overall':
+            text = []
+            idx+=1
+            # print(str(idx))
+            train = False
+            test = False
+            if idx in test_item:
+                test = True
+            if idx in train_item_all:
+                train = True
+            rating = (line.split('\t'))[0]
+            if train:
+                train_label_all.append(int(rating[0]))
+            if test:
+                test_label.append(int(rating[0]))
+            summary = (line.split('\t'))[-2]
+            reviewText = (line.split('\t'))[-1]
+            end_punctuation = ['.','?','!','~']
+            mid_punctuation = [',','<','>','"','(',')',':',';','&','^','[',']','{','}','|','/','*','#','=','_','+','%',"'"]
+            sentence = summary.split()
+            for i in range(len(sentence)-1,-1,-1):
+                while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
+                    sentence[i] = sentence[i].strip(sentence[i][-1])
+                while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
+                    sentence[i] = sentence[i].strip(sentence[i][0]) 
+                while len(sentence[i])>0 and sentence[i][-1] in end_punctuation:
+                    sentence[i] = sentence[i].strip(sentence[i][-1])
+                while len(sentence[i])>0 and sentence[i][0] in end_punctuation: 
+                    sentence[i] = sentence[i].strip(sentence[i][0])     
+                if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
+                    del sentence[i]
+            if len(sentence) > 1 :
+                for word in sentence:
+                    text.append(word)
+            start = 0
+            for end in range(len(reviewText)):
+                if reviewText[end] in end_punctuation:
+                    sentence = reviewText[start:end].split()
+                    start = end+1
+                    for i in range(len(sentence)-1,-1,-1):
+                        while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
+                            sentence[i] = sentence[i].strip(sentence[i][-1])
+                        while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
+                            sentence[i] = sentence[i].strip(sentence[i][0])   
+                        if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
+                            del sentence[i]
+                    if len(sentence) > 1:
+                        for word in sentence:
+                            text.append(word)
+            vec = text2vec(text)
+            if train:
+                train_vec_all.append(vec)
+            if test:
+                test_vec.append(vec)
+    for model_idx in range(30):
         random.seed(datetime.datetime.now().timestamp())
         random.shuffle(train_item_all)
         train_item = train_item_all[0:20000]
         train_vec = []
         train_label = []
-
-        items = open('./exp3-reviews.csv','r')
-        idx = 0
-        for line in items:
-            line = line.strip()
-            if (line.split('\t'))[0] != 'overall':
-                text = []
-                idx+=1
-                # print(str(idx))
-                train = False
-                test = False
-                if idx in test_item:
-                    test = True
-                if idx in train_item:
-                    train = True
-                rating = (line.split('\t'))[0]
-                if train:
-                    train_label.append(int(rating[0]))
-                if test and model_idx == 0:
-                    test_label.append(int(rating[0]))
-                summary = (line.split('\t'))[-2]
-                reviewText = (line.split('\t'))[-1]
-                end_punctuation = ['.','?','!','~']
-                mid_punctuation = [',','<','>','"','(',')',':',';','&','^','[',']','{','}','|','/','*','#','=','_','+','%',"'"]
-                sentence = summary.split()
-                for i in range(len(sentence)-1,-1,-1):
-                    while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
-                        sentence[i] = sentence[i].strip(sentence[i][-1])
-                    while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
-                        sentence[i] = sentence[i].strip(sentence[i][0]) 
-                    while len(sentence[i])>0 and sentence[i][-1] in end_punctuation:
-                        sentence[i] = sentence[i].strip(sentence[i][-1])
-                    while len(sentence[i])>0 and sentence[i][0] in end_punctuation: 
-                        sentence[i] = sentence[i].strip(sentence[i][0])     
-                    if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
-                        del sentence[i]
-                if len(sentence) > 1 :
-                    for word in sentence:
-                        text.append(word)
-                start = 0
-                for end in range(len(reviewText)):
-                    if reviewText[end] in end_punctuation:
-                        sentence = reviewText[start:end].split()
-                        start = end+1
-                        for i in range(len(sentence)-1,-1,-1):
-                            while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
-                                sentence[i] = sentence[i].strip(sentence[i][-1])
-                            while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
-                                sentence[i] = sentence[i].strip(sentence[i][0])   
-                            if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
-                                del sentence[i]
-                        if len(sentence) > 1:
-                            for word in sentence:
-                                text.append(word)
-                vec = text2vec(text)
-                if train:
-                    train_vec.append(vec)
-                if test and model_idx == 0:
-                    test_vec.append(vec)
+        for k in range(len(train_item_all)):
+            if k+1 in train_item:
+                train_vec.append(train_vec_all[k+1])
+                train_label.append(train_label_all[k+1])
         print("size of train set: "+str(len(train_vec)))
         clf = tree.DecisionTreeClassifier()
         print("start to train model "+str(model_idx)+"!")

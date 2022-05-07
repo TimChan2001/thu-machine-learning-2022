@@ -1,29 +1,18 @@
 from sklearn import svm
 import numpy as npy
-from gensim.models import Word2Vec
-import datetime, random
+import datetime
 
-model = Word2Vec.load("word2vec.model")
+dict = npy.load("word_dict.npy",allow_pickle=True)
 
 def text2vec(text):
-    sentence = []
-    complement_vec = []
-    for i in range(50):
-        complement_vec.append(0)
-    idx = 0
-    while len(sentence)<100:
-        try:
-            sentence.append(model.wv[text[idx]].tolist())
-            idx+=1
-        except:
-            idx+=1
-        if idx >= len(text):
-            break
-    while len(sentence)<100:
-        sentence.append(complement_vec)
-    sentence = npy.array(sentence)
-    return sentence.reshape([1,5000])[0]
-    
+    vec= []
+    for i in range(1000):
+        vec.append(0)
+    for i in range(len(text)):
+        if dict.item().get(text[i]) != None:
+            vec[dict.item().get(text[i])]+=1
+    return vec
+
 def main(): 
     stopwords = []
     stopwordsfile = open('./stopwords.txt','r') # 从stopwords.txt中parse出停用词
@@ -31,21 +20,22 @@ def main():
         line = line.strip()
         stopwords.append(line)
 
-    train_item_all = []
+    train_item = []
     test_item = []
-    test_vec = []
-    test_label = []
-    train_vec_all = []
-    train_label_all = []
-    predictions = []
     division = npy.load("./division.npy",allow_pickle=True)
     for i in range(len(division)):
         if i < 20000:
             test_item.append(division[i])
         else:
-            train_item_all.append(division[i])
+            train_item.append(division[i])
     test_item.sort()
-    train_item_all.sort()
+    train_item.sort()
+
+    test_vec = []
+    test_label = []
+    train_vec = []
+    train_label = []
+
     items = open('./exp3-reviews.csv','r')
     idx = 0
     for line in items:
@@ -54,16 +44,13 @@ def main():
             text = []
             idx+=1
             # print(str(idx))
-            train = False
-            test = False
+            train = True
             if idx in test_item:
-                test = True
-            if idx in train_item_all:
-                train = True
+                train = False
             rating = (line.split('\t'))[0]
             if train:
-                train_label_all.append(int(rating[0]))
-            if test:
+                train_label.append(int(rating[0]))
+            else:
                 test_label.append(int(rating[0]))
             summary = (line.split('\t'))[-2]
             reviewText = (line.split('\t'))[-1]
@@ -101,29 +88,36 @@ def main():
                             text.append(word)
             vec = text2vec(text)
             if train:
-                train_vec_all.append(vec)
-            if test:
+                train_vec.append(vec)
+            else:
                 test_vec.append(vec)
-
-    for model_idx in range(30):
-        random.seed(datetime.datetime.now().timestamp())
-        random.shuffle(train_item_all)
-        train_item = train_item_all[0:20000]
-        train_vec = []
-        train_label = []
-        for k in range(len(train_item_all)):
-            if k+1 in train_item:
-                train_vec.append(train_vec_all[k+1])
-                train_label.append(train_label_all[k+1])
-        print("size of train set: "+str(len(train_vec)))
-        clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=100)
-        print("start to train model "+str(model_idx)+"!")
+    print("size of train set: "+str(len(train_vec)))
+    sample_weight = []
+    model_weight = []
+    predictions = []
+    learning_rate = 0.5
+    for i in range(len(train_vec)):
+        sample_weight.append(1/len(train_vec))
+    for iter in range(15):
+        clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=500)
+        print("start to train!")
         start_time = datetime.datetime.now().timestamp()
-        clf.fit(train_vec, train_label)
+        clf.fit(train_vec, train_label, sample_weight=sample_weight)
         end_time = datetime.datetime.now().timestamp()
-        print("done training model "+str(model_idx)+" after "+str(round(end_time-start_time))+"s!")
-        prediction = clf.predict(test_vec)
-        predictions.append(prediction)
+        print("done training model "+str(iter)+" after "+str(round(end_time-start_time))+"s!")
+        predictions.append(clf.predict(test_vec))
+        prediction = clf.predict(train_vec)
+        error_rate = 0
+        for i in range(len(prediction)):
+            if prediction[i] != train_label[i]:
+                error_rate+=sample_weight[i]
+        print("e: "+str(error_rate))
+        alpha = npy.round(learning_rate*(npy.log((1-error_rate)/error_rate) + npy.log(5 - 1)),8)
+        model_weight.append(alpha)
+        for i in range(len(prediction)):
+            sample_weight[i]*=npy.exp(alpha*(prediction[i] != train_label[i]))
+        sample_weight/=sum(sample_weight)
+    print(model_weight)
     prediction_final = []
     for i in range(len(predictions[0])):
         vote = {
@@ -134,7 +128,7 @@ def main():
             5:0
         }
         for j in range(len(predictions)):
-            vote[predictions[j][i]]+=1
+            vote[predictions[j][i]]+=model_weight[j]
         votes = 0
         winner = 0
         for j in range(1,6):

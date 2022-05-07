@@ -107,26 +107,27 @@ def main():
     sample_weight = []
     model_weight = []
     predictions = []
-    learning_rate = 1.0
+    learning_rate = 0.5
     for i in range(len(train_vec)):
         sample_weight.append(1/len(train_vec))
-    for iter in range(5):
+    for iter in range(15):
         clf = tree.DecisionTreeClassifier()
         print("start to train!")
         start_time = datetime.datetime.now().timestamp()
         clf.fit(train_vec, train_label, sample_weight=sample_weight)
         end_time = datetime.datetime.now().timestamp()
         print("done training model "+str(iter)+" after "+str(round(end_time-start_time))+"s!")
-        prediction = clf.predict(test_vec)
-        predictions.append(prediction)
+        predictions.append(clf.predict(test_vec))
+        prediction = clf.predict(train_vec)
         error_rate = 0
         for i in range(len(prediction)):
-            if prediction[i] != test_label[i]:
+            if prediction[i] != train_label[i]:
                 error_rate+=sample_weight[i]
+        print("e: "+str(error_rate))
         alpha = npy.round(learning_rate*(npy.log((1-error_rate)/error_rate) + npy.log(5 - 1)),8)
         model_weight.append(alpha)
         for i in range(len(prediction)):
-            sample_weight[i]*=npy.exp(alpha*(prediction[i] != test_label[i]))
+            sample_weight[i]*=npy.exp(alpha*(prediction[i] != train_label[i]))
         sample_weight/=sum(sample_weight)
     prediction_final = []
     for i in range(len(predictions[0])):
