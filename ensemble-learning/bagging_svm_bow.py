@@ -101,8 +101,8 @@ def main():
         train_label = []
         for k in range(len(train_item_all)):
             if k+1 in train_item:
-                train_vec.append(train_vec_all[k+1])
-                train_label.append(train_label_all[k+1])
+                train_vec.append(train_vec_all[k])
+                train_label.append(train_label_all[k])
         print("size of train set: "+str(len(train_vec)))
         clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=500)
         print("start to train model "+str(model_idx)+"!")
