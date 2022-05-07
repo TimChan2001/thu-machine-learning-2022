@@ -1,7 +1,6 @@
 from sklearn import tree
-import numpy as npy
 from gensim.models import Word2Vec
-import datetime, random
+import datetime, random, numpy as npy
 
 model = Word2Vec.load("word2vec.model")
 
