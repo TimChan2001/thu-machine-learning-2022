@@ -99,7 +99,7 @@ def main():
         train_item = train_item_all[0:20000]
         train_vec = []
         train_label = []
-        for k in range(len(train_item_all)):
+        for k in range(220000):
             if k+1 in train_item:
                 train_vec.append(train_vec_all[k])
                 train_label.append(train_label_all[k])
