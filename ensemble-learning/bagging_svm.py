@@ -35,8 +35,8 @@ def main():
     test_item = []
     test_vec = []
     test_label = []
-    train_vec_all = []
-    train_label_all = []
+    vec_all = []
+    label_all = []
     predictions = []
     division = npy.load("./division.npy",allow_pickle=True)
     for i in range(len(division)):
@@ -54,15 +54,11 @@ def main():
             text = []
             idx+=1
             # print(str(idx))
-            train = False
             test = False
             if idx in test_item:
                 test = True
-            if idx in train_item_all:
-                train = True
             rating = (line.split('\t'))[0]
-            if train:
-                train_label_all.append(int(rating[0]))
+            label_all.append(int(rating[0]))
             if test:
                 test_label.append(int(rating[0]))
             summary = (line.split('\t'))[-2]
@@ -100,8 +96,7 @@ def main():
                         for word in sentence:
                             text.append(word)
             vec = text2vec(text)
-            if train:
-                train_vec_all.append(vec)
+            vec_all.append(vec)
             if test:
                 test_vec.append(vec)
 
@@ -113,8 +108,8 @@ def main():
         train_label = []
         for k in range(220000):
             if k+1 in train_item:
-                train_vec.append(train_vec_all[k])
-                train_label.append(train_label_all[k])
+                train_vec.append(vec_all[k])
+                train_label.append(label_all[k])
         print("size of train set: "+str(len(train_vec)))
         clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=100)
         print("start to train model "+str(model_idx)+"!")
