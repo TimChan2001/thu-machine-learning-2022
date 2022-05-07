@@ -1,6 +1,5 @@
 from sklearn import tree
-import numpy as npy
-import datetime,random
+import datetime,random,numpy as npy
 
 dict = npy.load("word_dict.npy",allow_pickle=True)
 
