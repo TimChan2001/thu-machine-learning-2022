@@ -1,7 +1,6 @@
 from sklearn import svm
-import numpy as npy
 from gensim.models import Word2Vec
-import datetime
+import datetime,numpy as npy
 
 model = Word2Vec.load("word2vec.model")
 
