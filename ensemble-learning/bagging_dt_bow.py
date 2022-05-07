@@ -93,10 +93,9 @@ def main():
         train_item = train_item_all[0:20000]
         train_vec = []
         train_label = []
-        for k in range(220000):
-            if k+1 in train_item:
-                train_vec.append(vec_all[k])
-                train_label.append(label_all[k])
+        for k in train_item:
+            train_vec.append(vec_all[k-1])
+            train_label.append(label_all[k-1])
         print("size of train set: "+str(len(train_vec)))
         clf = tree.DecisionTreeClassifier()
         print("start to train model "+str(model_idx)+"!")
