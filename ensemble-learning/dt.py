@@ -2,7 +2,7 @@ from sklearn import tree
 import numpy as npy
 from gensim.models import Word2Vec
 import datetime
-
+# 注释见svm.py
 model = Word2Vec.load("word2vec.model")
 
 def text2vec(text):

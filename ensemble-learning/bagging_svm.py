@@ -2,7 +2,7 @@ from sklearn import svm
 import numpy as npy
 from gensim.models import Word2Vec
 import datetime, random
-
+# 注释在集成学习的部分，其他部分注释见svm.py
 model = Word2Vec.load("word2vec.model")
 
 def text2vec(text):
@@ -100,10 +100,10 @@ def main():
             if test:
                 test_vec.append(vec)
 
-    for model_idx in range(30):
+    for model_idx in range(30): # T = 30
         random.seed(datetime.datetime.now().timestamp())
-        random.shuffle(train_item_all)
-        train_item = train_item_all[0:20000]
+        random.shuffle(train_item_all) 
+        train_item = train_item_all[0:20000] # sample规模为2w
         train_vec = []
         train_label = []
         for k in train_item:
@@ -117,10 +117,10 @@ def main():
         end_time = datetime.datetime.now().timestamp()
         print("done training model "+str(model_idx)+" after "+str(round(end_time-start_time))+"s!")
         prediction = clf.predict(test_vec)
-        predictions.append(prediction)
+        predictions.append(prediction) # 预测结果存储在predictions中等待投票
     prediction_final = []
     for i in range(len(predictions[0])):
-        vote = {
+        vote = {#记录票数
             1:0,
             2:0,
             3:0,
@@ -128,14 +128,14 @@ def main():
             5:0
         }
         for j in range(len(predictions)):
-            vote[predictions[j][i]]+=1
+            vote[predictions[j][i]]+=1#等权重投票
         votes = 0
         winner = 0
         for j in range(1,6):
             if vote[j] >= votes:
                 votes = vote[j] 
                 winner = j
-        prediction_final.append(winner)
+        prediction_final.append(winner)#选出最终预测结果
         
     correct = 0
     difference = 0

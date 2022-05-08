@@ -1,7 +1,7 @@
 from sklearn import tree
 from gensim.models import Word2Vec
 import datetime, random, numpy as npy
-
+# 注释见bagging_svm.py
 model = Word2Vec.load("word2vec.model")
 
 def text2vec(text):

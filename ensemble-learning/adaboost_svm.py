@@ -1,7 +1,7 @@
 from sklearn import svm
 from gensim.models import Word2Vec
 import datetime,numpy as npy
-
+# 注释在集成学习的部分，其他部分注释见svm.py
 model = Word2Vec.load("word2vec.model")
 
 def text2vec(text):
@@ -103,31 +103,31 @@ def main():
             else:
                 test_vec.append(vec)
     print("size of train set: "+str(len(train_vec)))
-    sample_weight = []
-    model_weight = []
+    sample_weight = [] # 样本的权重
+    model_weight = [] # 投票的权重
     predictions = []
     learning_rate = 0.5
     for i in range(len(train_vec)):
-        sample_weight.append(1/len(train_vec))
-    for iter in range(15):
+        sample_weight.append(1/len(train_vec)) # 初始样本权重
+    for iter in range(15): # T=15
         clf = svm.SVC(C=0.7, decision_function_shape='ovr', kernel='rbf',max_iter=100)
         print("start to train!")
         start_time = datetime.datetime.now().timestamp()
-        clf.fit(train_vec, train_label, sample_weight=sample_weight)
+        clf.fit(train_vec, train_label, sample_weight=sample_weight)#加权训练
         end_time = datetime.datetime.now().timestamp()
         print("done training model "+str(iter)+" after "+str(round(end_time-start_time))+"s!")
-        predictions.append(clf.predict(test_vec))
-        prediction = clf.predict(train_vec)
+        predictions.append(clf.predict(test_vec))#记录测试集预测结果
+        prediction = clf.predict(train_vec)#训练集预测结果
         error_rate = 0
-        for i in range(len(prediction)):
+        for i in range(len(prediction)):#计算训练集错误率
             if prediction[i] != train_label[i]:
                 error_rate+=sample_weight[i]
         print("e: "+str(error_rate))
         alpha = npy.round(learning_rate*(npy.log((1-error_rate)/error_rate) + npy.log(5 - 1)),8)
-        model_weight.append(alpha)
-        for i in range(len(prediction)):
+        model_weight.append(alpha)#投票权重alpha
+        for i in range(len(prediction)):#修改sample_weight
             sample_weight[i]*=npy.exp(alpha*(prediction[i] != train_label[i]))
-        sample_weight/=sum(sample_weight)
+        sample_weight/=sum(sample_weight)#归一化
     print(model_weight)
     prediction_final = []
     for i in range(len(predictions[0])):
@@ -139,14 +139,14 @@ def main():
             5:0
         }
         for j in range(len(predictions)):
-            vote[predictions[j][i]]+=model_weight[j]
+            vote[predictions[j][i]]+=model_weight[j]#加权投票
         votes = 0
         winner = 0
         for j in range(1,6):
             if vote[j] >= votes:
                 votes = vote[j] 
                 winner = j
-        prediction_final.append(winner)
+        prediction_final.append(winner)#确定最终预测结果
         
     correct = 0
     difference = 0

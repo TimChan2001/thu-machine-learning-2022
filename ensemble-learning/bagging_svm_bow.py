@@ -1,7 +1,7 @@
 from sklearn import svm
 import numpy as npy
 import datetime,random
-
+# 注释见bagging_svm.py
 dict = npy.load("word_dict.npy",allow_pickle=True)
 
 def text2vec(text):

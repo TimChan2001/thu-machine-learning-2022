@@ -3,7 +3,7 @@ import numpy as npy
 import datetime
 
 dict = npy.load("word_dict.npy",allow_pickle=True)
-
+# 注释见adaboost_svm.py
 def text2vec(text):
     vec= []
     for i in range(1000):

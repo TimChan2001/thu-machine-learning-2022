@@ -1,7 +1,7 @@
 from sklearn import svm
 import numpy as npy
 import datetime
-
+# 注释见svm.py
 dict = npy.load("word_dict.npy",allow_pickle=True)
 
 def text2vec(text):

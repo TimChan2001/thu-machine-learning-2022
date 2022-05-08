@@ -31,7 +31,7 @@ for line in items:
         text_len = 0
         for end in range(len(reviewText)):
             if reviewText[end] in end_punctuation:
-                sentence = reviewText[start:end].split()
+                sentence = reviewText[start:end].split() # 先通过end_punctuation拆分出句子，再以句子为单位分词
                 start = end+1
                 for i in range(len(sentence)-1,-1,-1):
                     while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
@@ -40,10 +40,10 @@ for line in items:
                         sentence[i] = sentence[i].strip(sentence[i][0])   
                     if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
                         del sentence[i]
-                if len(sentence) > 1:
-                    text.append(sentence)
-                    text_len+=len(sentence)
-        sentence = summary.split()
+                if len(sentence) > 1: # 去掉只有一个词的句子，因为没有上下文信息
+                    text.append(sentence) # 所有句子存入text中
+                    text_len+=len(sentence) # 统计文本长度，便于确定标准向量长度
+        sentence = summary.split() # 整个summary作为一个句子
         for i in range(len(sentence)-1,-1,-1):
             while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
                 sentence[i] = sentence[i].strip(sentence[i][-1])
@@ -55,28 +55,16 @@ for line in items:
                 sentence[i] = sentence[i].strip(sentence[i][0])     
             if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
                 del sentence[i]
-        if len(sentence) > 1 :
-            text.append(sentence)
-            text_len+=len(sentence)
+        if len(sentence) > 1 :# 去掉只有一个词的句子，因为没有上下文信息
+            text.append(sentence) # 所有句子存入text中
+            text_len+=len(sentence) # 统计文本长度，便于确定标准向量长度
 
 print("sentences: "+str(len(text)))
 sentences = text
 model = Word2Vec(min_count=10,vector_size=50)
 model.build_vocab(sentences)
-model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
-
-complement_vec = []
-for i in range(50):
-    complement_vec.append(0)
-np_wordList = []
-print(model.wv[0])
-for i in range(len(model.wv)):
-    np_wordList.append(model.wv[i])
-np_wordList.append(complement_vec)
-print("words: "+str(len(np_wordList)))
-vectors = npy.array(np_wordList)
-# npy.save('word_vector.npy', vectors)
-# model.save("word2vec.model")
+model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs) # train
+# model.save("word2vec.model") # 保存模型
 
 
 
