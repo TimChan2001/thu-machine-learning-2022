@@ -112,10 +112,74 @@ def train(model, optimizer, loss_fn, train_dataloader):
 
 def main():
     global out
-    train_vec = npy.load('./train_vec.npy',allow_pickle=True).tolist()
-    test_vec = npy.load('./test_vec.npy',allow_pickle=True).tolist()
-    train_label = npy.load('./train_label.npy',allow_pickle=True).tolist()
-    test_label = npy.load('./test_label.npy',allow_pickle=True).tolist()
+    for item in X_train: # 读取划分
+        train_idx.append(item[2])
+    for item in X_test:
+        test_idx.append(item[2])
+    test_vec = []
+    test_label = []
+    train_vec = []
+    train_label = []
+    items = open('./exp3-reviews.csv','r')
+    idx = 0
+    for line in items:
+        line = line.strip()
+        print(idx)
+        if (line.split('\t'))[0] != 'overall':
+            train1 = False
+            test = False
+            text = []
+            if idx in train_idx:
+                train1 = True # 获取条目属于训练集还是测试集
+            if idx in test_idx:
+                test = True
+            idx+=1
+            if idx == 22001:
+                break
+            rating = (line.split('\t'))[0]
+            if train1:
+                train_label.append(int(rating[0])-1)
+            if test:
+                test_label.append(int(rating[0])-1)
+            summary = (line.split('\t'))[-2]
+            reviewText = (line.split('\t'))[-1]
+            end_punctuation = ['.','?','!','~']
+            mid_punctuation = [',','<','>','"','(',')',':',';','&','^','[',']','{','}','|','/','*','#','=','_','+','%',"'"]
+            sentence = summary.split()
+            for i in range(len(sentence)-1,-1,-1): # 去符号 & 去停用词
+                while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
+                    sentence[i] = sentence[i].strip(sentence[i][-1])
+                while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
+                    sentence[i] = sentence[i].strip(sentence[i][0]) 
+                while len(sentence[i])>0 and sentence[i][-1] in end_punctuation:
+                    sentence[i] = sentence[i].strip(sentence[i][-1])
+                while len(sentence[i])>0 and sentence[i][0] in end_punctuation: 
+                    sentence[i] = sentence[i].strip(sentence[i][0])     
+                if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
+                    del sentence[i]
+            if len(sentence) > 1 :
+                for word in sentence:
+                    text.append(word)
+            start = 0
+            for end in range(len(reviewText)):
+                if reviewText[end] in end_punctuation:
+                    sentence = reviewText[start:end].split()
+                    start = end+1
+                    for i in range(len(sentence)-1,-1,-1):
+                        while len(sentence[i])>0 and sentence[i][-1] in mid_punctuation:
+                            sentence[i] = sentence[i].strip(sentence[i][-1])
+                        while len(sentence[i])>0 and sentence[i][0] in mid_punctuation: 
+                            sentence[i] = sentence[i].strip(sentence[i][0])   
+                        if sentence[i].isdigit() or sentence[i].lower() in stopwords or sentence[i]=='':
+                            del sentence[i]
+                    if len(sentence) > 1:
+                        for word in sentence:
+                            text.append(word)
+            vec = text2vec(text)
+            if train1:
+                train_vec.append(vec)
+            if test:
+                test_vec.append(vec)
     print("size of train set: "+str(len(train_vec)))
     print("size of test set: "+str(len(test_vec)))
     train_data = Data.TensorDataset(torch.tensor(train_vec), torch.tensor(train_label))

@@ -163,10 +163,10 @@ def main():
             if test:
                 test_vec.append(vec)
     ##################
-    npy.save('train_vec.npy',train_vec)
-    npy.save('test_vec.npy',test_vec)
-    npy.save('train_label.npy',train_label)
-    npy.save('test_label.npy',test_label)
+    # npy.save('train_vec.npy',train_vec)
+    # npy.save('test_vec.npy',test_vec)
+    # npy.save('train_label.npy',train_label)
+    # npy.save('test_label.npy',test_label)
     # train_vec = npy.load('./train_vec.npy',allow_pickle=True).tolist()
     # test_vec = npy.load('./test_vec.npy',allow_pickle=True).tolist()
     # train_label = npy.load('./train_label.npy',allow_pickle=True).tolist()
