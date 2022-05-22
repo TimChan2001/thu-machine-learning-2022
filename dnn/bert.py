@@ -22,16 +22,16 @@ else:
     print('No GPU available, using the CPU instead.')
     device = torch.device("cpu")
 
-checkpoint = 'bert-base-uncased'
+checkpoint = 'bert-base-uncased' # 预训练模型
 tokenizer = BertTokenizer.from_pretrained(checkpoint, do_lower_case=True)
 
-def preprocessing(sequences):
+def preprocessing(sequences): # sequences是summary+textReview合起来的文本
     model_inputs = tokenizer(sequences, padding="max_length", truncation=True)
     input_ids = model_inputs['input_ids']
     attention_mask = model_inputs['attention_mask']
-    return input_ids,attention_mask
+    return input_ids,attention_mask # 提取向量化表示和attention_mask
 
-class MyClassifier(nn.Module):
+class MyClassifier(nn.Module): # BERT架构，详见report
     def __init__(self, ):
         super().__init__()
 
@@ -49,14 +49,14 @@ class MyClassifier(nn.Module):
         logits = self.fullconnect(bert_state)
         return logits
 
-def initialize():
+def initialize(): # 初始化模型，优化器和损失函数
     classifier = MyClassifier()
     classifier.to(device)
     optimizer = torch.optim.AdamW(classifier.parameters(),lr = 0.01)
     loss_fn = nn.CrossEntropyLoss()
     return classifier, optimizer, loss_fn
 
-def train(classifier, optimizer, loss_fn, train_dataloader):
+def train(classifier, optimizer, loss_fn, train_dataloader): # 一个epoch的训练
     train_loss = 0
     start_time = datetime.datetime.now().timestamp()
     for step, batch in enumerate(train_dataloader):
@@ -98,9 +98,9 @@ def main():
     masks_test = torch.tensor(masks_test)
     y_test = torch.tensor(y_test)
     train_data = Data.TensorDataset(inputs_train, masks_train, y_train)
-    train_dataloader = Data.DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=True)
+    train_dataloader = Data.DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=True) # 打包进dataloader
     test_data = Data.TensorDataset(inputs_test, masks_test, y_test)
-    test_dataloader = Data.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=True)
+    test_dataloader = Data.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=True) # 打包进dataloader
     classifier, optimizer, loss_fn = initialize()
     for epoch_i in range(EPOCHS):
         print('epoch '+str(epoch_i)+' ......')
@@ -110,7 +110,7 @@ def main():
         test_accuracy = []
         test_mae = []
         test_rmse = []
-        for batch in test_dataloader:
+        for batch in test_dataloader: # 每个epoch后计算测试集指标
             input_ids, attn_mask, labels = tuple(t.to(device) for t in batch)
             with torch.no_grad():
                 logits = classifier(input_ids, attn_mask)  

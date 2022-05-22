@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 import datetime
 import numpy as np
-# H = 100
+# H = 100 用于生成输入向量
 BERT_H = 768
 H = 100
 OUTPUT = 5

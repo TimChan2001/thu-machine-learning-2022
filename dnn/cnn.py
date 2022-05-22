@@ -1,4 +1,3 @@
-from sklearn import svm
 import numpy as npy
 from gensim.models import Word2Vec
 import datetime
@@ -6,15 +5,15 @@ import torch
 import torch.nn as nn
 import torch.utils.data as Data
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-
+# 其他注释见rnn.py
 model = Word2Vec.load("word2vec.model")
 X_train = npy.load('./X_train_20000.npy',allow_pickle=True).tolist()
 X_test = npy.load('./X_test_2000.npy',allow_pickle=True).tolist()
 train_idx = []
 test_idx = []
 
-DROPOUT = 0.1
-CHANNEL = 128
+DROPOUT = 0.1 # 丢弃率
+CHANNEL = 128 # 输出通道数
 BATCH_SIZE = 32
 EPOCHS = 10
 out = open('cnn_'+str(CHANNEL)+'c_'+str(DROPOUT)+'d.log','w')
@@ -52,7 +51,7 @@ def text2vec(text):
         sentence.append(complement_vec)
     return sentence
 
-class CNN(nn.Module):
+class CNN(nn.Module): # CNN结构，具体见report
     def __init__(self):
         super().__init__()
         self.core1 = nn.Sequential(
