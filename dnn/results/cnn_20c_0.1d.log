@@ -1,0 +1,80 @@
+epoch 0 ......
+progress: 19%   train loss: 1.1558433244051027   train time: 7s
+progress: 39%   train loss: 1.1333600831724302   train time: 8s
+progress: 58%   train loss: 1.1042638779346963   train time: 9s
+progress: 77%   train loss: 1.0866062344979348   train time: 11s
+progress: 96%   train loss: 1.0687606722463585   train time: 12s
+progress: 100%   train loss: 1.0664183564186096   train time: 12s
+test loss: 0.9764237649857052   acc: 61.95436507936508%   MAE: 0.6071428571428571   RMSE: 1.1205419650185406
+epoch 1 ......
+progress: 19%   train loss: 0.9562308005064972   train time: 2s
+progress: 39%   train loss: 0.9593148790454469   train time: 3s
+progress: 58%   train loss: 0.9545242366202981   train time: 4s
+progress: 77%   train loss: 0.9504043461751046   train time: 6s
+progress: 96%   train loss: 0.945638022486263   train time: 8s
+progress: 100%   train loss: 0.9458349826812744   train time: 8s
+test loss: 0.9398986460670592   acc: 64.28571428571429%   MAE: 0.5639880952380952   RMSE: 1.0669606785175783
+epoch 2 ......
+progress: 19%   train loss: 0.8827170754267164   train time: 2s
+progress: 39%   train loss: 0.8903826862202641   train time: 3s
+progress: 58%   train loss: 0.8925080143348663   train time: 5s
+progress: 77%   train loss: 0.8981038849343876   train time: 6s
+progress: 96%   train loss: 0.9002245892204976   train time: 8s
+progress: 100%   train loss: 0.9013271143436432   train time: 9s
+test loss: 0.9325461236257402   acc: 64.53373015873017%   MAE: 0.5649801587301587   RMSE: 1.0712156848363943
+epoch 3 ......
+progress: 19%   train loss: 0.8633243626306865   train time: 2s
+progress: 39%   train loss: 0.8502587395337607   train time: 4s
+progress: 58%   train loss: 0.8554073800010364   train time: 6s
+progress: 77%   train loss: 0.860914644729075   train time: 8s
+progress: 96%   train loss: 0.8618932260253068   train time: 9s
+progress: 100%   train loss: 0.8651159365653992   train time: 9s
+test loss: 0.9392995692434765   acc: 62.54960317460318%   MAE: 0.5550595238095238   RMSE: 1.016664839788085
+epoch 4 ......
+progress: 19%   train loss: 0.8274386596581167   train time: 2s
+progress: 39%   train loss: 0.8221047597307387   train time: 3s
+progress: 58%   train loss: 0.831125880872774   train time: 5s
+progress: 77%   train loss: 0.8349066135665235   train time: 7s
+progress: 96%   train loss: 0.8392286641823868   train time: 8s
+progress: 100%   train loss: 0.8391517026901245   train time: 8s
+test loss: 0.922815531965286   acc: 63.93849206349206%   MAE: 0.5317460317460317   RMSE: 0.9922997208680832
+epoch 5 ......
+progress: 19%   train loss: 0.801387678493153   train time: 1s
+progress: 39%   train loss: 0.8044955954264803   train time: 3s
+progress: 58%   train loss: 0.8079492252454203   train time: 4s
+progress: 77%   train loss: 0.8136231622304342   train time: 5s
+progress: 96%   train loss: 0.8144969677369726   train time: 6s
+progress: 100%   train loss: 0.8168630489349366   train time: 6s
+test loss: 0.929686461176191   acc: 63.14484126984127%   MAE: 0.5550595238095238   RMSE: 1.0281967335738573
+epoch 6 ......
+progress: 19%   train loss: 0.757975535205573   train time: 9s
+progress: 39%   train loss: 0.7827654515559248   train time: 10s
+progress: 58%   train loss: 0.7817333972189895   train time: 11s
+progress: 77%   train loss: 0.783858012013029   train time: 11s
+progress: 96%   train loss: 0.7900578147559714   train time: 20s
+progress: 100%   train loss: 0.7916087403297424   train time: 20s
+test loss: 0.9452794071227785   acc: 62.84722222222222%   MAE: 0.5540674603174603   RMSE: 1.0226070610653606
+epoch 7 ......
+progress: 19%   train loss: 0.7425336468318278   train time: 1s
+progress: 39%   train loss: 0.7659854683638608   train time: 2s
+progress: 58%   train loss: 0.7684049682273759   train time: 3s
+progress: 77%   train loss: 0.7712207732726035   train time: 4s
+progress: 96%   train loss: 0.7704410050157303   train time: 5s
+progress: 100%   train loss: 0.770334292936325   train time: 5s
+test loss: 0.9767315349881611   acc: 61.70634920634921%   MAE: 0.5396825396825397   RMSE: 0.963835534182921
+epoch 8 ......
+progress: 19%   train loss: 0.7292760856880629   train time: 1s
+progress: 39%   train loss: 0.7391568440866668   train time: 2s
+progress: 58%   train loss: 0.7430351535864484   train time: 3s
+progress: 77%   train loss: 0.751200030598472   train time: 4s
+progress: 96%   train loss: 0.7516463422735599   train time: 5s
+progress: 100%   train loss: 0.7535312482833862   train time: 6s
+test loss: 0.9455854930574932   acc: 63.59126984126984%   MAE: 0.5496031746031746   RMSE: 1.0239166523375642
+epoch 9 ......
+progress: 19%   train loss: 0.7196143493672048   train time: 1s
+progress: 39%   train loss: 0.722164613330018   train time: 3s
+progress: 58%   train loss: 0.7266604659299771   train time: 5s
+progress: 77%   train loss: 0.7347059391144656   train time: 6s
+progress: 96%   train loss: 0.7401696510501392   train time: 8s
+progress: 100%   train loss: 0.743612239599228   train time: 8s
+test loss: 0.9627258389715164   acc: 62.59920634920635%   MAE: 0.5763888888888888   RMSE: 1.0666574462125926

@@ -1,0 +1,6 @@
+epoch 9 ......
+progress: 10%   train loss: 0.16352722363271674   train time: 25s
+progress: 19%   train loss: 0.1713096679704002   train time: 48s
+progress: 29%   train loss: 0.17512216356207325   train time: 73s
+progress: 39%   train loss: 0.17641531378494507   train time: 100s
+progress: 48%   train loss: 0.18016185893049075   train time: 137s

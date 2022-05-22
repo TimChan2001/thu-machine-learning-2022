@@ -1,0 +1,14 @@
+size of train set: 20000
+epoch 0 ......
+progress: 10%   train loss: 1.3259754122280685   train time: 2348s
+progress: 19%   train loss: 1.28941337579538   train time: 5025s
+progress: 29%   train loss: 1.265429943635319   train time: 7790s
+progress: 39%   train loss: 1.2447096685650931   train time: 10577s
+progress: 48%   train loss: 1.2329762861182127   train time: 13505s
+progress: 58%   train loss: 1.22568281320984   train time: 16504s
+progress: 67%   train loss: 1.2222043840732257   train time: 19489s
+progress: 77%   train loss: 1.2173660948965506   train time: 22517s
+progress: 87%   train loss: 1.2151825972273258   train time: 25583s
+progress: 96%   train loss: 1.2110190778326075   train time: 28713s
+progress: 100%   train loss: 1.2085938198089599   train time: 29914s
+test loss: 1.179531456932189   acc: 59.375%   MAE: 0.7797619047619048   RMSE: 1.3792135862535173

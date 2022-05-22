@@ -1,0 +1,13 @@
+epoch 2 ......
+progress: 10%   train loss: 1.1839758489952712   train time: 280s
+progress: 19%   train loss: 1.1811168105149072   train time: 534s
+progress: 29%   train loss: 1.1775939764238852   train time: 814s
+progress: 39%   train loss: 1.174836410279096   train time: 1121s
+progress: 48%   train loss: 1.1818080308825472   train time: 1431s
+progress: 58%   train loss: 1.1832492055985406   train time: 1692s
+progress: 67%   train loss: 1.1848638575886887   train time: 1954s
+progress: 77%   train loss: 1.1876060070466103   train time: 2197s
+progress: 87%   train loss: 1.1858227841294406   train time: 2446s
+progress: 96%   train loss: 1.183806282906683   train time: 2702s
+progress: 100%   train loss: 1.184180416870117   train time: 2814s
+test loss: 1.2029124592977858   acc: 57.34126984126984%   MAE: 0.8005952380952381
